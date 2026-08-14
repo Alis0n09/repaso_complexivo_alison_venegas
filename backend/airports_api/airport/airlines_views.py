@@ -6,6 +6,7 @@ from bson import ObjectId
 from bson.errors import InvalidId
 from .mongo import db
 from .mongo_serializers import AirlineSerializer
+from datetime import datetime
 
 col = db["airlines"]
 
@@ -33,7 +34,7 @@ def airlines_list_create(request):
     serializer.is_valid(raise_exception=True)
 
     data = serializer.validated_data
-    data.setdefault("created_at", date.today())
+    data.setdefault("created_at", datetime.today())
 
     res = col.insert_one(data)
     doc = col.find_one({"_id": res.inserted_id})

@@ -13,7 +13,7 @@ class Flight(models.Model):                               # VEHICULO = FLIGHT
     gate = models.ForeignKey(Gate, on_delete=models.PROTECT, related_name="flights")
     flight_number = models.CharField(max_length=20, null =False)
     destination = models.CharField(max_length=100, null =False)
-    departure_time = models.DateTimeField(null=False, blank=True) 
+    departure_time = models.TimeField(null=False, blank=True) 
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Status(models.TextChoices):

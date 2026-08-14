@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -33,7 +33,7 @@ def flight_events_list_create(request):
     serializer.is_valid(raise_exception=True)
 
     data = serializer.validated_data
-    data.setdefault("created_at", date.today())  # NO se envía desde el cliente, se toma la fecha actual
+    data.setdefault("created_at", datetime.today())  # NO se envía desde el cliente, se toma la fecha actual
 
     res = col.insert_one(data)
     doc = col.find_one({"_id": res.inserted_id})
